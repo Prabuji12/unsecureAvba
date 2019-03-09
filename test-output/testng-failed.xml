@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [mysuite]">
+  <test thread-count="5" name="Test1(failed)">
+    <classes>
+      <class name="com.dxc.unsecureAvba.test.Test1">
+        <methods>
+          <include name="afterClass"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+          <include name="loginAdmin"/>
+          <include name="deleteAccrualForLUS"/>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+          <include name="afterMethod"/>
+          <include name="beforeClass"/>
+          <include name="landAccrualPage"/>
+          <include name="beforeMethod"/>
+        </methods>
+      </class> <!-- com.dxc.unsecureAvba.test.Test1 -->
+    </classes>
+  </test> <!-- Test1(failed) -->
+</suite> <!-- Failed suite [mysuite] -->
