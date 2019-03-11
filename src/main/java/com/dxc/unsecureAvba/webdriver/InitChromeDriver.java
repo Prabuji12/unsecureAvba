@@ -1,6 +1,7 @@
 package com.dxc.unsecureAvba.webdriver;
 
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +16,7 @@ import com.dxc.ownmaven.support.SeleniumListener;
 import com.dxc.unsecureAvba.constants.TestConstants;
 import com.dxc.unsecureAvba.pom.Accrual;
 import com.dxc.unsecureAvba.pom.AnnualMenuList;
-import com.dxc.unsecureAvba.pom.FAInfo;
+import com.dxc.unsecureAvba.pom.LoginPage;
 
 public class InitChromeDriver {
 
@@ -27,7 +28,7 @@ public class InitChromeDriver {
 	protected SeleniumListener listen;
 	protected Locatable locatable;
 	protected Coordinates coordinate;
-	protected FAInfo faInfo;
+	protected LoginPage loginPage;
 	protected AnnualMenuList annual_menulist;
 	protected Accrual accrual;
 
@@ -36,27 +37,29 @@ public class InitChromeDriver {
 		System.out.println("Before Suite");
 		System.setProperty(TestConstants.systemProperty, TestConstants.driverPath);
 		driver = new ChromeDriver();
-	}
-
-	@BeforeTest
-	public void beforeTest() {
-		System.out.println("Before Test");
 		listen = new SeleniumListener();
 		event_driver = new EventFiringWebDriver(driver);
 		mouse_driver = new EventFiringMouse(driver, listen);
 		action = new Actions(driver);
 		js = (JavascriptExecutor) driver;
+		driver.manage().window().maximize();
+		driver.get(TestConstants.unsecureAvba);
+		loginPage = new LoginPage(driver);
+		annual_menulist = new AnnualMenuList(driver);
+		accrual = new Accrual(driver);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	@BeforeTest
+	public void beforeTest() {
+		System.out.println("Before Test");
+		
 	}
 
 	@BeforeClass
 	public void beforeClass() {
 		System.out.println("Before Class");
-		driver.manage().window().maximize();
-		driver.get(TestConstants.unsecureAvba);
-		faInfo = new FAInfo(driver);
-		annual_menulist = new AnnualMenuList(driver);
-		accrual = new Accrual(driver);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
 	}
 
 	@BeforeMethod
